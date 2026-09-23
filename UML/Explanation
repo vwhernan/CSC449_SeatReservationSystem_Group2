@@ -38,7 +38,7 @@ ShowtimeSeat
     o	Many-to-1 with ShowTime: References the associated screening. 
     o	Many-to-1 with Seat: Points to the physical venue chair via int SeatId. 
     o	1-to-Many with Cart Item: Can be referenced temporarily by an active shopping cart item. 
-    o	1-to-Many with Ticket: Points to the final issued ticket upon purchase completion. 
+    o	1-to-1 with Ticket: Points to the final issued ticket upon purchase completion. 
 Shopping Cart
   •	Purpose: Holds temporary selections for active guest or logged-in user sessions. 
   •	Key Attributes: int Id, int SessionId, List<Cart Item>, DateTime Created, DateTime LastUpdated. 

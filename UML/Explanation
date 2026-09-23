@@ -29,7 +29,6 @@ ShowTime
   •	Relationships:
     o	Many-to-1 with Movie: Points to the movie entity. 
     o	Many-to-1 with Auditorium: Linked via int AudtiroiumId. 
-    o	Many-to-1 with Movie Theater: Directly references Movie Theater for contextual lookup. 
     o	1-to-Many with ShowtimeSeat: Generates individual availability records for every seat during this showtime. 
 
 ShowtimeSeat

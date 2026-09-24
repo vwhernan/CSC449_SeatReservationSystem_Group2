@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace CSC449_SeatReservationSystem
 {
     public class Program
@@ -5,6 +7,11 @@ namespace CSC449_SeatReservationSystem
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            var connectionString = builder.Configuration.GetConnectionString("Default");
+            
+            builder.Services.AddDbContext<MovieMagicDbContext>(options =>
+            options.UseSqlServer(connectionString));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

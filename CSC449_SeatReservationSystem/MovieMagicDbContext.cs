@@ -1,5 +1,7 @@
 ﻿using CSC449_SeatReservationSystem.Entity;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using System.Reflection.Emit;
 
 namespace CSC449_SeatReservationSystem
 {
@@ -8,6 +10,8 @@ namespace CSC449_SeatReservationSystem
         
         public DbSet<MovieTheater> MovieTheaters { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Auditorium> TheaterAuditoriums { get; set; }
+        public DbSet<Seat> Seats { get; set; }
 
         public MovieMagicDbContext(DbContextOptions options) : base(options)
         {
@@ -16,21 +20,14 @@ namespace CSC449_SeatReservationSystem
         protected MovieMagicDbContext()
         {
         }
-        protected override void OnModelCreating(ModelBuilder builder)
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
 
-            builder.Entity<Address>()
-                .HasKey(a=> a.AddressId);
-
-            builder.Entity<MovieTheater>(entity =>
-            {
-                entity.HasKey(m => m.TheaterId);
-                entity.HasOne(m => m.Address);
-            });
-                
-           
-
+            // Scans and applies all IEntityTypeConfiguration classes in this assembly
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
+
     }
 }

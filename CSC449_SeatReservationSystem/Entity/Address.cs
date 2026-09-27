@@ -9,13 +9,10 @@ namespace CSC449_SeatReservationSystem.Entity
         [Key]
         public int Id { get; private set; }
 
-        [Required]
-        [StringLength(20)]
-        public string Number { get; private set; } = null!;
 
         [Required]
         [StringLength(200)]
-        public string StreetName { get; private set; } = null!;
+        public string Street { get; private set; } = null!;
 
         [Required]
         [StringLength(200)]
@@ -37,9 +34,7 @@ namespace CSC449_SeatReservationSystem.Entity
         {
             if (form == null){throw new ArgumentNullException(nameof(form));}
 
-            if (string.IsNullOrWhiteSpace(form.Number)){throw new ArgumentNullException(nameof(form.Number), "Street number cannot be null or empty.");}
-
-            if (string.IsNullOrWhiteSpace(form.StreetName)){throw new ArgumentNullException(nameof(form.StreetName), "Street name cannot be null or empty.");}
+            if (string.IsNullOrWhiteSpace(form.Street)){throw new ArgumentNullException(nameof(form.Street), "Street name cannot be null or empty.");}
 
             if (string.IsNullOrWhiteSpace(form.City)){throw new ArgumentNullException(nameof(form.City), "City cannot be null or empty.");}
 
@@ -47,8 +42,7 @@ namespace CSC449_SeatReservationSystem.Entity
 
             if (string.IsNullOrWhiteSpace(form.Zip)){throw new ArgumentNullException(nameof(form.Zip), "Zip code cannot be null or empty.");}
 
-            Number = form.Number;
-            StreetName = form.StreetName;
+            Street = form.Street;
             City = form.City;
             State = form.State;
             Zip = form.Zip;
@@ -57,13 +51,10 @@ namespace CSC449_SeatReservationSystem.Entity
 
         public class AddressModel
         {
-            [Required]
-            [StringLength(20)]
-            public string Number { get; set; } = null!;
 
             [Required]
             [StringLength(200)]
-            public string StreetName { get; set; } = null!;
+            public string Street { get; set; } = null!;
 
             [Required]
             [StringLength(200)]

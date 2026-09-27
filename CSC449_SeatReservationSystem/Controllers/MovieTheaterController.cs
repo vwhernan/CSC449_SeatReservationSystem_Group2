@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CSC449_SeatReservationSystem.Entity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CSC449_SeatReservationSystem.Controllers
 {
@@ -6,6 +7,8 @@ namespace CSC449_SeatReservationSystem.Controllers
     {
         public IActionResult Index()
         {
+            
+            
             return View();
         }
     }

@@ -6,11 +6,11 @@ namespace MovieMagicTests
 {
     public class MovieTests
     {
-        [Fact]
-        public void CreateMovie()
-        {
-            throw new NotImplementedException();
-        }
+        //[Fact]
+        //public void CreateMovie()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
     }
 }

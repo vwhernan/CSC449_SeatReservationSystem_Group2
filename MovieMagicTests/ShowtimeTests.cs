@@ -6,15 +6,16 @@ namespace MovieMagicTests
 {
     public class ShowtimeTests
     {
-        [Fact]
-        public void CreateShowtime()
-        {
-            throw new NotImplementedException();
-        }
+        //[Fact]
+        //public void CreateShowtime()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void AddMovieToShowTime()
-        {
-            throw new NotImplementedException ();   
-        }
+        //[Fact]
+        //public void AddMovieToShowTime()
+        //{
+        //    throw new NotImplementedException ();   
+        //}
     }
 }

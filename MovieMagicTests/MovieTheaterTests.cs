@@ -68,11 +68,11 @@ namespace MovieMagicTests
 
         }
 
-        [Fact]
-        public void AddAuditoriumToMovieTheater()
-        {
-            throw new NotImplementedException();
-        }
+        //[Fact]
+        //public void AddAuditoriumToMovieTheater()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         
     }

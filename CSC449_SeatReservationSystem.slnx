@@ -1,3 +1,8 @@
 <Solution>
-  <Project Path="CSC449_SeatReservationSystem/CSC449_SeatReservationSystem.csproj" />
+  <Folder Name="/01-Ui/">
+    <Project Path="CSC449_SeatReservationSystem/CSC449_SeatReservationSystem.csproj" />
+  </Folder>
+  <Folder Name="/02-Tests/">
+    <Project Path="MovieMagicTests/MovieMagicTests.csproj" Id="6ceb04a2-24cc-46ee-9c22-6d32529b3238" />
+  </Folder>
 </Solution>

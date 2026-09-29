@@ -1,0 +1,14 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+
+@model MovieTheater
+@{
+
+}
+<h3>Theater Details</h3>
+<row>
+    <partial name="_View" />
+    <button-row>
+        <edit-button asp-route-theaterId="@Model.TheaterId"></edit-button>
+        <delete-button asp-route-theaterId="@Model.TheaterId"></delete-button>
+    </button-row>
+</row>

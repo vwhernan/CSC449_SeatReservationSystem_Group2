@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection.Emit;
 
 namespace CSC449_SeatReservationSystem.Entity
 {
@@ -46,6 +47,17 @@ namespace CSC449_SeatReservationSystem.Entity
             City = form.City;
             State = form.State;
             Zip = form.Zip;
+            
+        }
+
+        public void UpdateAddressInfo(AddressModel model)
+        {
+            ArgumentNullException.ThrowIfNull(model);
+
+            Street = model.Street;
+            City = model.City;
+            State = model.State;
+            Zip = model.Zip;
             
         }
 

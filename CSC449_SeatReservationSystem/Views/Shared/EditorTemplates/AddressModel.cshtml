@@ -1,0 +1,28 @@
+﻿@model CSC449_SeatReservationSystem.Entity.Address.AddressModel
+
+<div class="border rounded p-3 bg-light">
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Street, new { @class = "form-label fw-semibold" })
+        @Html.EditorFor(m => m.Street, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Street, "", new { @class = "text-danger small" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.City, new { @class = "form-label fw-semibold" })
+        @Html.EditorFor(m => m.City, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger small" })
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            @Html.LabelFor(m => m.State, new { @class = "form-label fw-semibold" })
+            @Html.EditorFor(m => m.State, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.State, "", new { @class = "text-danger small" })
+        </div>
+        <div class="col-md-6 mb-3">
+            @Html.LabelFor(m => m.Zip, new { @class = "form-label fw-semibold" })
+            @Html.EditorFor(m => m.Zip, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Zip, "", new { @class = "text-danger small" })
+        </div>
+    </div>
+</div>

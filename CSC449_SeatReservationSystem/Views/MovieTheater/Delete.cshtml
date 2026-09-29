@@ -1,0 +1,20 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+
+@model MovieTheater
+@{
+
+}
+<h3>Theater Details</h3>
+<row>
+    <partial name="_View" />
+    @using (Html.BeginForm())
+    {
+        <alert alert-heading="Are you sure?" ui-style="Warning">
+            Are you sure you want to delete this theater?
+        </alert>
+        <button-row>
+            <yes-button></yes-button>
+            <no-button asp-route-unitId="@Model.TheaterId"></no-button>
+        </button-row>
+    }
+</row>

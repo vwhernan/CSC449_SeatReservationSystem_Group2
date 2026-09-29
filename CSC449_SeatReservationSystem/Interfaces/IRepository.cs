@@ -7,7 +7,7 @@
         Task<bool> CreateAsync(TModel form);
         Task<TEntity> GetByIdAsync(int id);
         Task<ICollection<TEntity>> GetAllAsync();
-        Task<bool> UpdateAsync(TModel form);
+        Task<bool> UpdateAsync(TModel form, int id);
         Task<bool> DeleteAsync(int id);
     }
 }

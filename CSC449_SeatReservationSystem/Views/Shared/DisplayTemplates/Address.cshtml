@@ -1,0 +1,9 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+@model Address
+
+@if(Model != null)
+{
+    <span>@Model.Street</span>
+    <span>@($"{Model.City}, {Model.State} {Model.Zip}")</span>
+   
+}

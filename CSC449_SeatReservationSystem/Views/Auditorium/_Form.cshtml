@@ -1,0 +1,26 @@
+﻿@using static CSC449_SeatReservationSystem.Entity.Auditorium
+@model AuditoriumModel;
+
+@{
+    int theaterId = ViewBag.theaterId;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.TheaterId, new { value = theaterId })
+
+    <div class="card p-4 shadow-sm">
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+
+        <div class="mt-4">
+            <button-row>
+                <submit-button></submit-button>
+                <cancel-button asp-action="Details" asp-controller="MovieTheater" asp-route-theaterId="@theaterId"></cancel-button>
+            </button-row>
+        </div>
+    </div>
+}

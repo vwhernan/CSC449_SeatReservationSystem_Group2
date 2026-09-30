@@ -1,25 +1,31 @@
 ﻿@using CSC449_SeatReservationSystem.Entity
+@model IReadOnlyCollection<MovieTheater>;
 
-<h1>
-    Movie Theaters
-</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Address</th>
-        </tr>
-    </thead>
-   <tbody>
-     
-@*     @foreach(var theater in Model)
-    {
-          <tr>
-            <td>@theater.Name</td>
-            <td>@theater.Address</td>
-          </tr>     
-    }  *@   
-   </tbody>
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="mb-0">Movie Theaters</h1>
+    <a class="btn btn-primary" asp-action="Create" asp-controller="MovieTheater">Add A Movie Theater!</a>
+</div>
 
-</table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var theater in Model)
+            {
+                <tr>
+                    <td>@theater.Name</td>
+                    <td>@Html.DisplayFor(m => theater.Address)</td>
+                    <td> <a asp-action="Details" asp-route-theaterId="@theater.TheaterId">Details</a></td>
+                </tr>
+            }
+        </tbody>
+
+    </table>

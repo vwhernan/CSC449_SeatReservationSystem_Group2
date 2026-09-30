@@ -22,6 +22,7 @@ namespace CSC449_SeatReservationSystem.Entity
         {
             if (form.Name == null) { throw new NullReferenceException(nameof(form.Name)); }
             Name = form.Name;
+            TheaterId = form.TheaterId;
         }
 
         public void AddSeat(Seat seat)
@@ -44,6 +45,8 @@ namespace CSC449_SeatReservationSystem.Entity
             [Required]
             [StringLength(100)]
             public string Name { get; set; } = null!;
+
+            public int TheaterId { get; set; }
 
         }
     }

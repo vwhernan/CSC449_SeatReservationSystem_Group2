@@ -1,6 +1,7 @@
 ﻿using CSC449_SeatReservationSystem.Entity;
 using CSC449_SeatReservationSystem.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using static CSC449_SeatReservationSystem.Entity.Address;
 using static CSC449_SeatReservationSystem.Entity.MovieTheater;
 
 namespace CSC449_SeatReservationSystem.Repositories
@@ -15,19 +16,17 @@ namespace CSC449_SeatReservationSystem.Repositories
         }
         public async Task<bool> CreateAsync(MovieTheaterModel form)
         {
-            if(form.Name == null || form.Address == null)
+            if (form == null || string.IsNullOrWhiteSpace(form.Name) || form.Address == null)
             {
                 return false;
             }
 
-            var movieTheater = new MovieTheater(form); 
+            var movieTheater = new MovieTheater(form);
 
             await _db.MovieTheaters.AddAsync(movieTheater).ConfigureAwait(false);
-
             int rowsAffected = await _db.SaveChangesAsync().ConfigureAwait(false);
 
             return rowsAffected > 0;
-
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -56,24 +55,69 @@ namespace CSC449_SeatReservationSystem.Repositories
             return rowsAffected > 0;
         }
 
-        public Task<ICollection<MovieTheater>> GetAllAsync()
+        public async Task<ICollection<MovieTheater>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _db.MovieTheaters
+                .Include(t => t.Address)
+                .Include(t => t.Auditoriums)
+                .ToArrayAsync()
+                .ConfigureAwait(false);
         }
 
-        public Task<MovieTheater> GetByIdAsync(int id)
+        public async Task<MovieTheater> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _db.MovieTheaters
+                .Include(t => t.Address)
+                .Include(t => t.Auditoriums)
+                .SingleAsync(t => t.TheaterId == id)
+                .ConfigureAwait(false);
+                
         }
 
-        public Task<bool> UpdateAsync(MovieTheater form)
+        public async Task<bool> UpdateAsync(MovieTheaterModel form, int id)
         {
-            throw new NotImplementedException();
+            if (form == null)
+            {
+                return false;
+            }
+
+            var existingTheater = await _db.MovieTheaters
+            .Include(t => t.Address)
+            .FirstOrDefaultAsync(t => t.TheaterId == id);
+
+            if (existingTheater == null)
+            {
+                return false;
+            }
+
+            existingTheater.UpdateTheaterInfo(form);
+
+            var rowsAffected = await _db.SaveChangesAsync().ConfigureAwait(false);
+
+            return rowsAffected > 0;
+        }
+    }
+
+    public static class MovieTheaterExtensions
+    {
+        public static MovieTheaterModel ToModel(this MovieTheater theater)
+        {
+            if (theater == null) return null;
+
+            return new MovieTheaterModel
+            {
+                Name = theater.Name,
+                Address =  new AddressModel
+                {
+                    Street = theater.Address.Street,
+                    City = theater.Address.City,
+                    State = theater.Address.State,
+                    Zip = theater.Address.Zip
+                }
+            };
         }
 
-        public Task<bool> UpdateAsync(MovieTheaterModel form)
-        {
-            throw new NotImplementedException();
-        }
+        public static async Task<MovieTheaterModel> ToModelAsync(this Task<MovieTheater> result)
+        => await result.ContinueWith(r => r.Result.ToModel());
     }
 }

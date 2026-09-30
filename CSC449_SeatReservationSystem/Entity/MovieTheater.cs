@@ -12,6 +12,7 @@ namespace CSC449_SeatReservationSystem.Entity
 
         [Required]
         [StringLength(100)]
+        [Display(Name="Name")]
         public string Name { get; private set; } = null!;
 
         public virtual ICollection<Auditorium>? Auditoriums { get; private set; } = new List<Auditorium>();
@@ -23,9 +24,21 @@ namespace CSC449_SeatReservationSystem.Entity
             if (form.Name == null) { throw new NullReferenceException(nameof(form.Name)); }
 
             Name = form.Name;
-            Address = form.Address;
+            Address = new Address(form.Address);
             
         }
+
+
+        public void UpdateTheaterInfo(MovieTheaterModel form)
+        {
+            ArgumentNullException.ThrowIfNull(form);
+            ArgumentNullException.ThrowIfNull(form.Address);
+            ArgumentNullException.ThrowIfNull(form.Name);
+
+            Name = form.Name;
+            Address.UpdateAddressInfo(form.Address);
+        }
+
 
         public void AddAuditorium(Auditorium auditorium)
         {
@@ -39,11 +52,12 @@ namespace CSC449_SeatReservationSystem.Entity
         public class MovieTheaterModel()
         {
             [Required]
-            public Address Address { get;  set; } 
+            [StringLength(100)]
+            [Display(Name = "Name")]
+            public string Name { get; set; } = null!;
 
             [Required]
-            [StringLength(100)]
-            public string Name { get; set; } 
+            public Address.AddressModel Address { get; set; } = new Address.AddressModel();
 
         }
     }

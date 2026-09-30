@@ -1,14 +1,47 @@
 ﻿@using CSC449_SeatReservationSystem.Entity
-
 @model MovieTheater
 @{
-
+    ViewData["Title"] = "Theater Details";
 }
-<h3>Theater Details</h3>
-<row>
-    <partial name="_View" />
-    <button-row>
-        <edit-button asp-route-theaterId="@Model.TheaterId"></edit-button>
-        <delete-button asp-route-theaterId="@Model.TheaterId"></delete-button>
-    </button-row>
-</row>
+
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Theater Details</h2>
+        <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Back to Theaters</a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Overview</h5>
+                    <div class="d-flex gap-2">
+                        <edit-button asp-route-theaterId="@Model.TheaterId" class="btn btn-warning"></edit-button>
+                        <delete-button asp-route-theaterId="@Model.TheaterId" class="btn btn-danger"></delete-button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <partial name="_View.MovieTheater" model="Model" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Auditoriums</h5>
+                    <a class="btn btn-success"
+                       asp-action="Create"
+                       asp-controller="Auditorium"
+                       asp-route-theaterId="@Model.TheaterId">
+                        <i class="bi bi-plus-lg"></i> Add New
+                    </a>
+                </div>
+                <div class="card-body p-0">
+                    <partial name="_View.Auditoriums" model="@Model.Auditoriums" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

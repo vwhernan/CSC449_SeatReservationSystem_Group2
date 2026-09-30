@@ -23,6 +23,7 @@ namespace CSC449_SeatReservationSystem.Controllers
         public async Task<IActionResult> Details(int theaterId)
         {
             var theater = await _db.GetByIdAsync(theaterId).ConfigureAwait(false);
+            ViewBag.TheaterId = theaterId;
             return View(theater);
         }
 
@@ -55,6 +56,7 @@ namespace CSC449_SeatReservationSystem.Controllers
             var model = await _db.GetByIdAsync(theaterId)
                 .ToModelAsync()
                 .ConfigureAwait(false);
+            ViewBag.TheaterId = theaterId;
             return View(model);
         }
 
@@ -70,6 +72,7 @@ namespace CSC449_SeatReservationSystem.Controllers
                 }
             }
 
+            ViewBag.TheaterId = theaterId;
             return View(form);
         }
 
@@ -94,7 +97,7 @@ namespace CSC449_SeatReservationSystem.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-
+            ViewBag.TheaterId = theaterId;
             return RedirectToAction(nameof(Details), theaterId);
         }
 

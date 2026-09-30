@@ -2,6 +2,7 @@ using CSC449_SeatReservationSystem.Entity;
 using CSC449_SeatReservationSystem.Interfaces;
 using CSC449_SeatReservationSystem.Repositories;
 using Microsoft.EntityFrameworkCore;
+using static CSC449_SeatReservationSystem.Entity.Auditorium;
 using static CSC449_SeatReservationSystem.Entity.MovieTheater;
 
 namespace CSC449_SeatReservationSystem
@@ -19,6 +20,7 @@ namespace CSC449_SeatReservationSystem
 
             //Register Repos
             builder.Services.AddScoped<IRepository<MovieTheater, MovieTheaterModel>,MovieTheaterRepository>();
+            builder.Services.AddScoped<IRepository<Auditorium, AuditoriumModel>,AuditoriumRepository>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

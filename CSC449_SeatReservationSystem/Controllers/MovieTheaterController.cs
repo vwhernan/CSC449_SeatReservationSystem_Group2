@@ -8,21 +8,21 @@ namespace CSC449_SeatReservationSystem.Controllers
 {
     public class MovieTheaterController : Controller
     {
-        private IRepository<MovieTheater, MovieTheaterModel> _db;
-        public MovieTheaterController(IRepository<MovieTheater, MovieTheaterModel> db)
+        private IRepository<MovieTheater, MovieTheaterModel> _repo;
+        public MovieTheaterController(IRepository<MovieTheater, MovieTheaterModel> repo)
         {
-            _db= db;
+            _repo= repo;
         }
         public async Task<IActionResult> Index()
         {
-            var theaters = await _db.GetAllAsync().ConfigureAwait(false);
+            var theaters = await _repo.GetAllAsync().ConfigureAwait(false);
             return View(theaters);
         }
 
 
         public async Task<IActionResult> Details(int theaterId)
         {
-            var theater = await _db.GetByIdAsync(theaterId).ConfigureAwait(false);
+            var theater = await _repo.GetByIdAsync(theaterId).ConfigureAwait(false);
             ViewBag.TheaterId = theaterId;
             return View(theater);
         }
@@ -38,7 +38,7 @@ namespace CSC449_SeatReservationSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _db.CreateAsync(form).ConfigureAwait(false);
+                var result = await _repo.CreateAsync(form).ConfigureAwait(false);
                 if (result == true)
                 {
                     return RedirectToAction(nameof(Index));
@@ -53,7 +53,7 @@ namespace CSC449_SeatReservationSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int theaterId)
         {
-            var model = await _db.GetByIdAsync(theaterId)
+            var model = await _repo.GetByIdAsync(theaterId)
                 .ToModelAsync()
                 .ConfigureAwait(false);
             ViewBag.TheaterId = theaterId;
@@ -65,7 +65,7 @@ namespace CSC449_SeatReservationSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _db.UpdateAsync(form, theaterId).ConfigureAwait(false);
+                var result = await _repo.UpdateAsync(form, theaterId).ConfigureAwait(false);
                 if (result == true)
                 {
                     return RedirectToAction(nameof(Index));
@@ -81,7 +81,7 @@ namespace CSC449_SeatReservationSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int theaterId)
         {
-            var model = await _db.GetByIdAsync(theaterId).ConfigureAwait(false);
+            var model = await _repo.GetByIdAsync(theaterId).ConfigureAwait(false);
             return View(model);
         }
 
@@ -91,7 +91,7 @@ namespace CSC449_SeatReservationSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _db.DeleteAsync(theaterId).ConfigureAwait(false);
+                var result = await _repo.DeleteAsync(theaterId).ConfigureAwait(false);
                 if (result == true)
                 {
                     return RedirectToAction(nameof(Index));

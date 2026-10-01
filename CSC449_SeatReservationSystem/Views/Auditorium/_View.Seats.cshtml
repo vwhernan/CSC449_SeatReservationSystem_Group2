@@ -1,0 +1,27 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+@model ICollection<Seat>;
+
+@{
+
+}
+
+<table class="table text-center">
+    <thead>
+        <tr>
+            <th>Row</th>
+            <th>Seat Number</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var seat in Model)
+        {
+            <tr>
+                <td>@seat.Row</td>
+                <td>@seat.SeatNumber</td>
+                <td>@seat.SeatType</td>
+            </tr>
+        }
+    </tbody>
+</table>

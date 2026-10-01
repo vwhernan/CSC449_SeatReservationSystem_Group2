@@ -1,0 +1,54 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+@using static CSC449_SeatReservationSystem.Entity.Seat
+@model SeatModel
+
+@{
+    ViewData["Title"] = "Add Seat";
+    var auditoriumId = ViewBag.AuditoriumId;
+}
+
+<div class="container my-4" style="max-width: 600px;">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white py-3">
+            <h4 class="card-title mb-0">Add New Seat</h4>
+        </div>
+        <div class="card-body p-4">
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(m => m.AuditoriumId, new { value = auditoriumId })
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Row, new { @class = "form-label fw-semibold" })
+                    @Html.TextBoxFor(m => m.Row, new { @class = "form-control", placeholder = "e.g., A, B, C" })
+                    @Html.ValidationMessageFor(m => m.Row, "", new { @class = "text-danger small mt-1 d-block" })
+                </div>
+
+          
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.SeatNumber, new { @class = "form-label fw-semibold" })
+                    @Html.TextBoxFor(m => m.SeatNumber, new { @class = "form-control", type = "number", min = "1", placeholder = "e.g., 1, 2, 10" })
+                    @Html.ValidationMessageFor(m => m.SeatNumber, "", new { @class = "text-danger small mt-1 d-block" })
+                </div>
+
+      
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.SeatType, new { @class = "form-label fw-semibold" })
+                    @Html.DropDownListFor(
+                        m => m.SeatType,
+                        Html.GetEnumSelectList<SeatType>(),
+                        "-- Select Seat Type --",
+                        new { @class = "form-select" }
+                    )
+                    @Html.ValidationMessageFor(m => m.SeatType, "", new { @class = "text-danger small mt-1 d-block" })
+                </div>
+
+                <div class="mt-4 pt-2 border-top">
+                    <button-row>
+                        <submit-button></submit-button>
+                        <cancel-button asp-action="Details" asp-controller="Auditorium" asp-route-id="@auditoriumId"></cancel-button>
+                    </button-row>
+                </div>
+            }
+        </div>
+    </div>
+</div>

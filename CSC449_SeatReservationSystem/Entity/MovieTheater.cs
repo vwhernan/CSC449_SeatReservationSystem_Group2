@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static CSC449_SeatReservationSystem.Entity.Address;
+using static CSC449_SeatReservationSystem.Entity.MovieTheater;
 
 namespace CSC449_SeatReservationSystem.Entity
 {
@@ -60,5 +62,27 @@ namespace CSC449_SeatReservationSystem.Entity
             public Address.AddressModel Address { get; set; } = new Address.AddressModel();
 
         }
+    }
+    public static class MovieTheaterExtensions
+    {
+        public static MovieTheaterModel ToModel(this MovieTheater theater)
+        {
+            if (theater == null) return null;
+
+            return new MovieTheaterModel
+            {
+                Name = theater.Name,
+                Address = new AddressModel
+                {
+                    Street = theater.Address.Street,
+                    City = theater.Address.City,
+                    State = theater.Address.State,
+                    Zip = theater.Address.Zip
+                }
+            };
+        }
+
+        public static async Task<MovieTheaterModel> ToModelAsync(this Task<MovieTheater> result)
+        => await result.ContinueWith(r => r.Result.ToModel());
     }
 }

@@ -97,27 +97,4 @@ namespace CSC449_SeatReservationSystem.Repositories
             return rowsAffected > 0;
         }
     }
-
-    public static class MovieTheaterExtensions
-    {
-        public static MovieTheaterModel ToModel(this MovieTheater theater)
-        {
-            if (theater == null) return null;
-
-            return new MovieTheaterModel
-            {
-                Name = theater.Name,
-                Address =  new AddressModel
-                {
-                    Street = theater.Address.Street,
-                    City = theater.Address.City,
-                    State = theater.Address.State,
-                    Zip = theater.Address.Zip
-                }
-            };
-        }
-
-        public static async Task<MovieTheaterModel> ToModelAsync(this Task<MovieTheater> result)
-        => await result.ContinueWith(r => r.Result.ToModel());
-    }
 }

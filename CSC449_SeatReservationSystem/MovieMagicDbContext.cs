@@ -12,6 +12,7 @@ namespace CSC449_SeatReservationSystem
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Auditorium> TheaterAuditoriums { get; set; }
         public DbSet<Seat> Seats { get; set; }
+        public DbSet<Movie> Movies { get; set; }
 
         public MovieMagicDbContext(DbContextOptions options) : base(options)
         {

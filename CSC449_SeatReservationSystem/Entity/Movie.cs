@@ -45,6 +45,7 @@ namespace CSC449_SeatReservationSystem.Entity
         {
             Genres = newGenres;
         }
+        
 
         public class MovieModel
         {
@@ -69,7 +70,7 @@ namespace CSC449_SeatReservationSystem.Entity
     public enum Genres
     {
         None,
-        Aciton, 
+        Action, 
         Comedy, 
         Horror, 
         Mystery,

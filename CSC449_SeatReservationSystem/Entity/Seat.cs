@@ -38,9 +38,16 @@ namespace CSC449_SeatReservationSystem.Entity
             AuditoriumId = form.AuditoriumId;
         }
 
-        public void UpdateSeatType(SeatType newType)
+        public void UpdateSeatInfo(SeatModel form)
         {
-            SeatType = newType;
+            ArgumentNullException.ThrowIfNull(form);
+            ArgumentNullException.ThrowIfNullOrEmpty(form.Row);
+            if (form.SeatNumber <= 0) { throw new ArgumentOutOfRangeException(nameof(form.SeatNumber), "Seat number must be greater than zero."); }
+            if (form.AuditoriumId <= 0) { throw new ArgumentOutOfRangeException(nameof(form.AuditoriumId), "A valid AuditoriumId must be provided."); }
+
+            Row = form.Row;
+            SeatNumber = form.SeatNumber;
+            SeatType = form.SeatType;
         }
 
         public class SeatModel

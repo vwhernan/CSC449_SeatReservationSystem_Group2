@@ -1,0 +1,72 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+@model Auditorium
+
+@{
+    ViewData["Title"] = "Auditorium Details";
+}
+
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Auditorium Details</h2>
+        <a asp-action="Details"
+           asp-controller="MovieTheater"
+           asp-route-theaterId="@Model.TheaterId"
+           class="btn btn-outline-secondary btn-sm">
+            Back to theater
+        </a>
+    </div>
+
+    <div class="row g-4">
+        <!-- Overview Section -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Overview</h5>
+                    <div class="d-flex gap-2">
+                        <edit-button asp-route-auditoriumId="@Model.Id" class="btn btn-warning"></edit-button>
+                        <delete-button asp-route-auditoriumId="@Model.Id" class="btn btn-danger"></delete-button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <partial name="_View.Auditorium" model="Model" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Seats Section -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Seats</h5>
+                    <a class="btn btn-success"
+                       asp-action="Create"
+                       asp-controller="Seat"
+                       asp-route-auditoriumId="@Model.Id">
+                        <i class="bi bi-plus-lg"></i> Add New
+                    </a>
+                </div>
+                <div class="card-body p-0">
+                    <partial name="_View.Seats" model="@Model.Seats" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Showtimes Section -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Showtimes</h5>
+                    <a class="btn btn-success"
+                       asp-action="Create"
+                       asp-controller="Showtime"
+                       asp-route-auditoriumId="@Model.Id">
+                        <i class="bi bi-plus-lg"></i> Add New
+                    </a>
+                </div>
+                <div class="card-body p-0">
+                    <partial name="_View.Showtimes" model="@Model.Showtimes" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

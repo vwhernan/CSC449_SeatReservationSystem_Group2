@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static CSC449_SeatReservationSystem.Entity.Address;
+using static CSC449_SeatReservationSystem.Entity.Auditorium;
+using static CSC449_SeatReservationSystem.Entity.MovieTheater;
 
 namespace CSC449_SeatReservationSystem.Entity
 {
@@ -25,10 +28,21 @@ namespace CSC449_SeatReservationSystem.Entity
             TheaterId = form.TheaterId;
         }
 
+        public void UpdateAuditoriumInfo(AuditoriumModel form)
+        {
+            ArgumentNullException.ThrowIfNull(form);
+            Name = form.Name;
+            
+        }
+
         public void AddSeat(Seat seat)
         {
+
             if (seat == null){throw new ArgumentNullException(nameof(seat));}
-            Seats.Add(seat);
+            else
+            {
+                Seats.Add(seat);
+            }
         }
 
         public void AddShowtime(Showtime showtime)
@@ -49,5 +63,22 @@ namespace CSC449_SeatReservationSystem.Entity
             public int TheaterId { get; set; }
 
         }
+    }
+
+    public static class AuditoriumExtensions
+    {
+        public static AuditoriumModel ToModel(this Auditorium auditorium)
+        {
+            if (auditorium == null) return null;
+
+            return new AuditoriumModel
+            {
+                Name = auditorium.Name,
+                TheaterId = auditorium.TheaterId,
+            };
+        }
+
+        public static async Task<AuditoriumModel> ToModelAsync(this Task<Auditorium> result)
+        => await result.ContinueWith(r => r.Result.ToModel());
     }
 }

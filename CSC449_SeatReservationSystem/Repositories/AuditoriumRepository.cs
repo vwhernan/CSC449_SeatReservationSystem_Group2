@@ -18,44 +18,68 @@ namespace CSC449_SeatReservationSystem.Repositories
         {
             ArgumentNullException.ThrowIfNull(form);
 
-            //Get theater so we can add the auditorium
+            
             var theater = await _db.MovieTheaters
                 .Include(t => t.Auditoriums)
                 .FirstOrDefaultAsync(t => t.TheaterId == form.TheaterId);
 
             if (theater == null)
             {
-                return false; // Theater not found
+                return false; 
             }
-
             var auditorium = new Auditorium(form);
-
-            // Add to the MovieTheater's navigation collection
+           
             theater.AddAuditorium(auditorium);
 
-            //Save changes to the database
             int rowsAffected = await _db.SaveChangesAsync();
             return rowsAffected > 0;
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+           var auditorium = await _db.TheaterAuditoriums
+                .SingleAsync(t => t.Id == id)
+                .ConfigureAwait(false);
+            if (auditorium == null)
+            {
+                return false;
+            }
+
+            _db.TheaterAuditoriums.Remove(auditorium);
+            int rowsAffected = await _db.SaveChangesAsync();
+            return rowsAffected > 0;
+
         }
 
-        public Task<ICollection<Auditorium>> GetAllAsync()
+        public async Task<ICollection<Auditorium>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _db.TheaterAuditoriums
+                .Include(a => a.Seats)
+                .Include(a => a.Showtimes)
+                .ToListAsync();
         }
 
-        public Task<Auditorium> GetByIdAsync(int id)
+        public async Task<Auditorium> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _db.TheaterAuditoriums
+                .Include(a => a.Seats)
+                .Include(a => a.Showtimes)
+                .SingleAsync(a => a.Id == id);
         }
 
-        public Task<bool> UpdateAsync(AuditoriumModel form, int id)
+        public async Task<bool> UpdateAsync(AuditoriumModel form, int id)
         {
-            throw new NotImplementedException();
+            ArgumentNullException.ThrowIfNull(form);
+
+            var auditorium = await _db.TheaterAuditoriums.FindAsync(id);
+            if (auditorium == null)
+            {
+                return false;
+            }
+
+            auditorium.UpdateAuditoriumInfo(form);
+            int rowsAffected = await _db.SaveChangesAsync();
+            return rowsAffected > 0;
         }
     }
 }

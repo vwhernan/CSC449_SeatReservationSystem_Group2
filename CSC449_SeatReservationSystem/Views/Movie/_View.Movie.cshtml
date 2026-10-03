@@ -1,0 +1,16 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+@model Movie
+
+<dl class="row mb-0 pt-3">
+    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(m => m.Name)</dt>
+    <dd class="col-sm-8 fw-bold">@Html.DisplayFor(m => m.Name)</dd>
+
+    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(m => m.Rating)</dt>
+    <dd class="col-sm-8">@Html.DisplayFor(m => m.Rating)</dd>
+    
+    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(m => m.Genres)</dt>
+    <dd class="col-sm-8">@Html.DisplayFor(m => m.Genres)</dd>
+
+    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(m => m.MovieLengthMinutes)</dt>
+    <dd class="col-sm-8">@Model.MovieLengthMinutes min</dd>
+</dl>

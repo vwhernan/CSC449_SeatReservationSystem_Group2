@@ -1,0 +1,18 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+@model Movie
+@{
+    ViewData["Title"] = "Delete Movie";
+}
+<h3>Delete Movie</h3>
+<partial name="_View.Movie" model="Model"/>
+
+@using (Html.BeginForm())
+{
+    <alert alert-heading="Are you sure?" ui-style="warning">
+        Are you sure you want to delete this movie? This action cannot be undone.
+    </alert>
+    <button-row>
+        <yes-button></yes-button>
+        <no-button asp-action="Details" asp-route-movieId="@Model.Id"></no-button>
+    </button-row>
+}

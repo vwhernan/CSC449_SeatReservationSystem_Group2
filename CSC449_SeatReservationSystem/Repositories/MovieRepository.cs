@@ -51,7 +51,7 @@ namespace CSC449_SeatReservationSystem.Repositories
                 .ExecuteUpdateAsync(s => s
                     .SetProperty(m => m.Name, model.Name)
                     .SetProperty(m => m.Rating, model.Rating)
-                    .SetProperty(m => m.Genres, model.Genres)
+                    .SetProperty(m => m.Genre, model.Genres)
                     .SetProperty(m => m.MovieLengthMinutes, model.MovieLengthMinutes))
                 .ConfigureAwait(false);
 
@@ -77,7 +77,7 @@ namespace CSC449_SeatReservationSystem.Repositories
         {
             Name = movie.Name,
             Rating = movie.Rating,
-            Genres = movie.Genres,
+            Genres = movie.Genre,
             MovieLengthMinutes = movie.MovieLengthMinutes
         };
 

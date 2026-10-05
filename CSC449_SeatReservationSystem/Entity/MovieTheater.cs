@@ -18,6 +18,7 @@ namespace CSC449_SeatReservationSystem.Entity
         public string Name { get; private set; } = null!;
 
         public virtual ICollection<Auditorium>? Auditoriums { get; private set; } = new List<Auditorium>();
+        public virtual ICollection<Movie>? NowPlaying { get; private set; } = new List<Movie>();
 
         private MovieTheater(){ }
         public MovieTheater(MovieTheaterModel form)
@@ -39,6 +40,23 @@ namespace CSC449_SeatReservationSystem.Entity
 
             Name = form.Name;
             Address.UpdateAddressInfo(form.Address);
+        }
+
+        public void AddMovie(Movie movie)
+        {
+            ArgumentNullException.ThrowIfNull(movie);
+
+            if (!NowPlaying.Contains(movie))
+            {
+                NowPlaying.Add(movie);
+            }
+        }
+
+        public void RemoveMovie(Movie movie)
+        {
+            ArgumentNullException.ThrowIfNull(movie);
+
+            NowPlaying?.Remove(movie);
         }
 
 

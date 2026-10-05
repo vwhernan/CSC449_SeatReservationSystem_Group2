@@ -13,7 +13,7 @@ namespace CSC449_SeatReservationSystem.Entity
 
         public Ratings Rating { get; private set; }
 
-        public Genres Genres { get; private set; }
+        public Genres Genre { get; private set; }
 
         [Required]
         [Display(Name="Minutes")]
@@ -33,7 +33,7 @@ namespace CSC449_SeatReservationSystem.Entity
 
             Name = form.Name;
             Rating = form.Rating;
-            Genres = form.Genres;
+            Genre = form.Genres;
             MovieLengthMinutes = form.MovieLengthMinutes;
         }
 
@@ -44,7 +44,7 @@ namespace CSC449_SeatReservationSystem.Entity
 
         public void UpdateGenre(Genres newGenres)
         {
-            Genres = newGenres;
+            Genre = newGenres;
         }
         
 

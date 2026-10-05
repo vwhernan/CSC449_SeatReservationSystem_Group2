@@ -1,0 +1,40 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+@model ICollection<Movie>;
+
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Rating</th>
+                    <th>Minutes</th>
+                    <th>Genre</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var movie in Model)
+                {
+                    <tr>
+                        <td class="fw-semibold">@movie.Name</td>
+                        <td class="fw-semibold">@movie.Rating</td>
+                        <td class="fw-semibold">@movie.MovieLengthMinutes</td>
+                        <td class="fw-semibold">@movie.Genre</td>
+                        
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="p-3 text-muted text-center">
+        No Movies at this theater.
+    </div>
+}

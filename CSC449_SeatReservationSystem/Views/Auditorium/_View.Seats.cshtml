@@ -11,6 +11,7 @@
             <th>Row</th>
             <th>Seat Number</th>
             <th>Type</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -18,9 +19,14 @@
         @foreach(var seat in Model)
         {
             <tr>
-                <td>@seat.Row</td>
-                <td>@seat.SeatNumber</td>
-                <td>@seat.SeatType</td>
+                <td>@Html.DisplayFor(m => seat.Row)</td>
+                <td>@Html.DisplayFor(m => seat.SeatNumber)</td>
+                <td>@Html.DisplayFor(m => seat.SeatType)</td>
+                <td>
+                    <a asp-controller="Seat" 
+                    asp-action="Details" 
+                    asp-route-id="@seat.Id">Details</a>
+                </td>
             </tr>
         }
     </tbody>

@@ -1,0 +1,13 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+@model Seat
+
+<dl class="row mb-0 pt-3">
+    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(m => m.Row)</dt>
+    <dd class="col-sm-8 fw-bold">@Html.DisplayFor(m => m.Row)</dd>
+
+    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(m => m.SeatNumber)</dt>
+    <dd class="col-sm-8">@Html.DisplayFor(m => m.SeatNumber)</dd>
+
+    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(m => m.SeatType)</dt>
+    <dd class="col-sm-8">@Html.DisplayFor(m => m.SeatType)</dd>
+</dl>

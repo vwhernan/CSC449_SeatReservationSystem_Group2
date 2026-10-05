@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static CSC449_SeatReservationSystem.Entity.Address;
+using static CSC449_SeatReservationSystem.Entity.MovieTheater;
+using static CSC449_SeatReservationSystem.Entity.Seat;
 
 namespace CSC449_SeatReservationSystem.Entity
 {
@@ -69,8 +72,33 @@ namespace CSC449_SeatReservationSystem.Entity
 
     public enum SeatType
     {
+        [Display(Name = "Standard")]
         Normal,
+
+        [Display(Name = "ADA Accessible")]
         Ada_Accessable,
+
+        [Display(Name = "Out of Order")]
         Out_Of_Order
     }
+
+    public static class SeatExtensions
+    {
+        public static SeatModel ToModel(this Seat seat)
+        {
+            if (seat == null) return null;
+
+            return new SeatModel
+            {
+                Row = seat.Row,
+                SeatNumber = seat.SeatNumber,
+                SeatType=seat.SeatType,
+                AuditoriumId = seat.AuditoriumId,
+            };
+        }
+
+        public static async Task<SeatModel> ToModelAsync(this Task<Seat> result)
+        => await result.ContinueWith(r => r.Result.ToModel());
+    }
+
 }

@@ -11,6 +11,11 @@ namespace CSC449_SeatReservationSystem.Entity
         [Required]
         public DateTime StartTime { get; private set; }
 
+
+        public DateTime EndTime => Movie != null
+        ? StartTime.AddMinutes(Movie.MovieLengthMinutes)
+        : StartTime;
+
         [Required]
         public double TicketPrice { get; private set; }
 

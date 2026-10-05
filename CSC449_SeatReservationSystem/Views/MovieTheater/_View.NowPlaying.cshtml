@@ -1,5 +1,6 @@
 ﻿@using CSC449_SeatReservationSystem.Entity
-@model IReadOnlyCollection<Auditorium>
+@model ICollection<Movie>;
+
 
 @if (Model != null && Model.Any())
 {
@@ -8,21 +9,22 @@
             <thead class="table-light">
                 <tr>
                     <th>Name</th>
-                    <th>Actions</th>
+                    <th>Rating</th>
+                    <th>Minutes</th>
+                    <th>Genre</th>
+                    
                 </tr>
             </thead>
             <tbody>
-                @foreach (var auditorium in Model)
+                @foreach (var movie in Model)
                 {
                     <tr>
-                        <td class="fw-semibold">@auditorium.Name</td>
-                        <td> 
-                            <a asp-action="Details"
-                               asp-controller="Auditorium"
-                               asp-route-id="@auditorium.Id">
-                                Details
-                            </a>
-                        </td>
+                        <td class="fw-semibold">@movie.Name</td>
+                        <td class="fw-semibold">@movie.Rating</td>
+                        <td class="fw-semibold">@movie.MovieLengthMinutes</td>
+                        <td class="fw-semibold">@movie.Genre</td>
+                        
+                        
                     </tr>
                 }
             </tbody>
@@ -32,6 +34,6 @@
 else
 {
     <div class="p-3 text-muted text-center">
-        No auditoriums available for this theater.
+        No Movies at this theater.
     </div>
 }

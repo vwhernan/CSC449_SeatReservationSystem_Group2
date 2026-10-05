@@ -4,6 +4,7 @@ using CSC449_SeatReservationSystem;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSC449_SeatReservationSystem.Migrations
 {
     [DbContext(typeof(MovieMagicDbContext))]
-    partial class MovieMagicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261005194407_AddEndTimeToShowTime")]
+    partial class AddEndTimeToShowTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,13 +95,10 @@ namespace CSC449_SeatReservationSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Genre")
+                    b.Property<int>("Genres")
                         .HasColumnType("int");
 
                     b.Property<int>("MovieLengthMinutes")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MovieTheaterTheaterId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -110,8 +110,6 @@ namespace CSC449_SeatReservationSystem.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MovieTheaterTheaterId");
 
                     b.ToTable("Movies");
                 });
@@ -212,13 +210,6 @@ namespace CSC449_SeatReservationSystem.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CSC449_SeatReservationSystem.Entity.Movie", b =>
-                {
-                    b.HasOne("CSC449_SeatReservationSystem.Entity.MovieTheater", null)
-                        .WithMany("NowPlaying")
-                        .HasForeignKey("MovieTheaterTheaterId");
-                });
-
             modelBuilder.Entity("CSC449_SeatReservationSystem.Entity.Seat", b =>
                 {
                     b.HasOne("CSC449_SeatReservationSystem.Entity.Auditorium", null)
@@ -258,8 +249,6 @@ namespace CSC449_SeatReservationSystem.Migrations
                         .IsRequired();
 
                     b.Navigation("Auditoriums");
-
-                    b.Navigation("NowPlaying");
                 });
 #pragma warning restore 612, 618
         }

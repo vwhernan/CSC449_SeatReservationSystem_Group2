@@ -6,7 +6,7 @@ using static CSC449_SeatReservationSystem.Entity.MovieTheater;
 
 namespace CSC449_SeatReservationSystem.Repositories
 {
-    public class MovieTheaterRepository : IRepository<MovieTheater, MovieTheaterModel>
+    public class MovieTheaterRepository : IMovieTheaterRepository
     {
         private readonly MovieMagicDbContext _db;
 
@@ -69,6 +69,7 @@ namespace CSC449_SeatReservationSystem.Repositories
             return await _db.MovieTheaters
                 .Include(t => t.Address)
                 .Include(t => t.Auditoriums)
+                .Include(t => t.NowPlaying)
                 .SingleAsync(t => t.TheaterId == id)
                 .ConfigureAwait(false);
                 
@@ -96,5 +97,32 @@ namespace CSC449_SeatReservationSystem.Repositories
 
             return rowsAffected > 0;
         }
+
+        public async Task<bool> UpdateNowPlayingMoviesAsync(int theaterId, List<int> selectedMovieIds)
+        {
+            var theater = await _db.MovieTheaters
+                .Include(t => t.NowPlaying)
+                .FirstOrDefaultAsync(t => t.TheaterId == theaterId)
+                .ConfigureAwait(false);
+
+            if (theater == null) return false;
+
+            // Fetch all movies matching selected IDs
+            var selectedMovies = await _db.Movies
+                .Where(m => selectedMovieIds.Contains(m.Id))
+                .ToListAsync()
+                .ConfigureAwait(false);
+
+            // Sync NowPlaying list
+            theater.NowPlaying.Clear();
+            foreach (var movie in selectedMovies)
+            {
+                theater.NowPlaying.Add(movie);
+            }
+
+            int rowsAffected = await _db.SaveChangesAsync().ConfigureAwait(false);
+            return rowsAffected > 0;
+        }
+
     }
 }

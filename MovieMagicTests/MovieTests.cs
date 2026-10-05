@@ -27,7 +27,7 @@ namespace MovieMagicTests
             //Assert
             Assert.Equal(movieModel.Name, movie.Name);
             Assert.Equal(movieModel.Rating, movie.Rating);
-            Assert.Equal(movieModel.Genres, movie.Genres);
+            Assert.Equal(movieModel.Genres, movie.Genre);
             Assert.Equal(movieModel.MovieLengthMinutes, movie.MovieLengthMinutes);
 
         }

@@ -47,11 +47,19 @@ namespace CSC449_SeatReservationSystem.Entity
 
         public void AddShowtime(Showtime showtime)
         {
-            if (showtime == null){throw new ArgumentNullException(nameof(showtime));}
-            else
+            ArgumentNullException.ThrowIfNull(showtime);
+
+
+            // Check if any existing showtime overlaps with the incoming showtime
+            bool hasOverlap = Showtimes.Any(s =>
+                showtime.StartTime < s.EndTime && showtime.EndTime > s.StartTime);
+
+            if (hasOverlap)
             {
-                Showtimes!.Add(showtime);
+                throw new InvalidOperationException("This showtime overlaps with an existing showtime in this auditorium.");
             }
+
+            Showtimes.Add(showtime);
         }
 
         public class AuditoriumModel

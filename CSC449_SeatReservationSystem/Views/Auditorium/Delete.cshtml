@@ -1,0 +1,25 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+
+@model Auditorium
+@{
+
+}
+
+<h3>@Model.Name</h3>
+<row>
+    <partial name="_View.Auditorium" />
+    @using (Html.BeginForm())
+    {
+      
+        @Html.Hidden("auditoriumId", Model.Id)
+        @Html.Hidden("theaterId", Model.TheaterId)
+
+        <alert alert-heading="Are you sure?" ui-style="Warning">
+            Are you sure you want to delete this auditorium?
+        </alert>
+        <button-row>
+            <yes-button></yes-button>
+            <no-button asp-action="Details" asp-route-Id="@Model.Id"></no-button>
+        </button-row>
+    }
+</row>

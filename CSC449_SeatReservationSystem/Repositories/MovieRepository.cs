@@ -7,16 +7,16 @@ namespace CSC449_SeatReservationSystem.Repositories
 {
     public class MovieRepository : IRepository<Movie, MovieModel>
     {
-        private readonly MovieMagicDbContext _db;
+        private readonly MovieMagicDbContext _repo;
 
-        public MovieRepository(MovieMagicDbContext db)
+        public MovieRepository(MovieMagicDbContext repo)
         {
-            _db = db;
+            _repo = repo;
         }
 
         public async Task<ICollection<Movie>> GetAllAsync()
         {
-            return await _db.Movies
+            return await _repo.Movies
                 .AsNoTracking()
                 .OrderBy(m => m.Name)
                 .ToListAsync()
@@ -25,7 +25,7 @@ namespace CSC449_SeatReservationSystem.Repositories
 
         public async Task<Movie?> GetByIdAsync(int id)
         {
-            return await _db.Movies
+            return await _repo.Movies
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id)
                 .ConfigureAwait(false);
@@ -35,8 +35,8 @@ namespace CSC449_SeatReservationSystem.Repositories
         {
             var movie = new Movie(model);
 
-            _db.Movies.Add(movie);
-            return await _db.SaveChangesAsync().ConfigureAwait(false) > 0;
+            _repo.Movies.Add(movie);
+            return await _repo.SaveChangesAsync().ConfigureAwait(false) > 0;
         }
 
         public async Task<bool> UpdateAsync(MovieModel model, int id)
@@ -46,7 +46,7 @@ namespace CSC449_SeatReservationSystem.Repositories
                 return false;
             }
 
-            var rowsAffected = await _db.Movies
+            var rowsAffected = await _repo.Movies
                 .Where(m => m.Id == id)
                 .ExecuteUpdateAsync(s => s
                     .SetProperty(m => m.Name, model.Name)
@@ -60,14 +60,14 @@ namespace CSC449_SeatReservationSystem.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var movie = await _db.Movies.FindAsync(id).ConfigureAwait(false);
+            var movie = await _repo.Movies.FindAsync(id).ConfigureAwait(false);
             if (movie is null)
             {
                 return false;
             }
 
-            _db.Movies.Remove(movie);
-            return await _db.SaveChangesAsync().ConfigureAwait(false) > 0;
+            _repo.Movies.Remove(movie);
+            return await _repo.SaveChangesAsync().ConfigureAwait(false) > 0;
         }
     }
 

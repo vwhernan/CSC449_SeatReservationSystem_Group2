@@ -16,6 +16,7 @@ namespace CSC449_SeatReservationSystem.Entity
         public Genres Genres { get; private set; }
 
         [Required]
+        [Display(Name="Minutes")]
         public int MovieLengthMinutes { get; private set; }
 
         private Movie() { }

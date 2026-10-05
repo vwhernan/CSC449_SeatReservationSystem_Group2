@@ -51,10 +51,12 @@ namespace CSC449_SeatReservationSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int auditoriumId)
         {
-            var auditorium = _repo.GetByIdAsync(auditoriumId)
+            var auditorium = await _repo.GetByIdAsync(auditoriumId)
                 .ToModelAsync()
                 .ConfigureAwait(false);
 
+            ViewBag.theaterId = auditorium.TheaterId;
+            ViewBag.AuditoriumId = auditoriumId;
             return View(auditorium);
         
         }
@@ -67,11 +69,12 @@ namespace CSC449_SeatReservationSystem.Controllers
                 var result = await _repo.UpdateAsync(form, auditoriumId).ConfigureAwait(false);
                 if (result == true)
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Details), new {id = auditoriumId});
                 }
             }
 
             ViewBag.AuditoriumId = auditoriumId;
+            ViewBag.theaterId = form.TheaterId;
             return View(form);
         }
 
@@ -80,23 +83,24 @@ namespace CSC449_SeatReservationSystem.Controllers
         public async Task<IActionResult> Delete(int auditoriumId)
         {
             var model = await _repo.GetByIdAsync(auditoriumId).ConfigureAwait(false);
+
             return View(model);
         }
 
         [HttpPost]
         [ActionName("Delete")]
-        public async Task<IActionResult> DoDelete(int auditoriumId)
+        public async Task<IActionResult> DoDelete(int auditoriumId, int theaterId)
         {
             if (ModelState.IsValid)
             {
                 var result = await _repo.DeleteAsync(auditoriumId).ConfigureAwait(false);
                 if (result == true)
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Details", "MovieTheater", new {theaterId});
                 }
             }
             ViewBag.AuditoriumId = auditoriumId;
-            return RedirectToAction(nameof(Details), auditoriumId);
+            return RedirectToAction(nameof(Details), new { id = auditoriumId });
         }
 
 

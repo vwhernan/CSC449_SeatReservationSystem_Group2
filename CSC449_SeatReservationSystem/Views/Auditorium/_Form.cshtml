@@ -2,7 +2,10 @@
 @model AuditoriumModel;
 
 @{
-    int theaterId = ViewBag.theaterId;
+    
+    int? auditoriumId = ViewBag.AuditoriumId;
+    int? theaterId = ViewBag.theaterId;
+    string actionName = ViewContext.RouteData.Values["action"]?.ToString().ToLower();
 }
 
 @using (Html.BeginForm())
@@ -19,7 +22,13 @@
         <div class="mt-4">
             <button-row>
                 <submit-button></submit-button>
-                <cancel-button asp-action="Details" asp-controller="MovieTheater" asp-route-theaterId="@theaterId"></cancel-button>
+                @if(actionName == "create")
+                    {
+                        <cancel-button asp-action="Details" asp-controller="MovieTheater" asp-route-theaterId="@theaterId"></cancel-button>
+                    }
+                else{
+                    <cancel-button asp-action="Details" asp-controller="Auditorium" asp-route-Id="@auditoriumId"></cancel-button>
+                    }
             </button-row>
         </div>
     </div>

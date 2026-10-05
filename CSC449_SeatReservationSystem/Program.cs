@@ -21,7 +21,7 @@ namespace CSC449_SeatReservationSystem
             options.UseSqlServer(connectionString));
 
             //Register Repos
-            builder.Services.AddScoped<IRepository<MovieTheater, MovieTheaterModel>,MovieTheaterRepository>();
+            builder.Services.AddScoped<IMovieTheaterRepository, MovieTheaterRepository>();
             builder.Services.AddScoped<IRepository<Auditorium, AuditoriumModel>,AuditoriumRepository>();
             builder.Services.AddScoped<IRepository<Movie, MovieModel>, MovieRepository>();
             builder.Services.AddScoped<IRepository<Seat, SeatModel>,SeatRepository>();

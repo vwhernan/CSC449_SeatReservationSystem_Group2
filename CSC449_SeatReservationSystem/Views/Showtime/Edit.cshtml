@@ -1,0 +1,13 @@
+﻿@using static CSC449_SeatReservationSystem.Entity.Showtime
+@model ShowtimeModel;
+
+@{
+    var auditoriumId = ViewBag.auditoriumId;
+}
+<h1>Add New Showtime</h1>
+
+<partial name="_Form" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

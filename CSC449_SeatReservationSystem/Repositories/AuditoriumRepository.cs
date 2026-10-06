@@ -56,6 +56,7 @@ namespace CSC449_SeatReservationSystem.Repositories
             return await _db.TheaterAuditoriums
                 .Include(a => a.Seats)
                 .Include(a => a.Showtimes)
+                .ThenInclude(s => s.Movie)
                 .ToListAsync();
         }
 
@@ -64,6 +65,7 @@ namespace CSC449_SeatReservationSystem.Repositories
             return await _db.TheaterAuditoriums
                 .Include(a => a.Seats)
                 .Include(a => a.Showtimes)
+                .ThenInclude(s => s.Movie)
                 .SingleAsync(a => a.Id == id);
         }
 

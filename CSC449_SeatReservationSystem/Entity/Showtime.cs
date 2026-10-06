@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static CSC449_SeatReservationSystem.Entity.Auditorium;
+using static CSC449_SeatReservationSystem.Entity.Showtime;
 
 namespace CSC449_SeatReservationSystem.Entity
 {
@@ -73,5 +75,25 @@ namespace CSC449_SeatReservationSystem.Entity
             [Required]
             public int AuditoriumId { get; set; }
         }
+
+    }
+
+    public static class ShowTimeExtensions
+    {
+        public static ShowtimeModel ToModel(this Showtime showtime)
+        {
+            if (showtime == null) return null;
+
+            return new ShowtimeModel
+            {
+                StartTime = showtime.StartTime,
+                TicketPrice = showtime.TicketPrice,
+                Movie = showtime.Movie,
+                AuditoriumId = showtime.AuditoriumId
+            };
+        }
+
+        public static async Task<ShowtimeModel> ToModelAsync(this Task<Showtime> result)
+        => await result.ContinueWith(r => r.Result.ToModel());
     }
 }

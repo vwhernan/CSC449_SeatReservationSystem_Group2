@@ -1,0 +1,18 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+@model Showtime
+
+<dl class="row mb-0 pt-3">
+    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(m => m.Movie)</dt>
+    <dd class="col-sm-8 fw-bold">@Html.DisplayFor(m => m.Movie)</dd>
+
+    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(m => m.StartTime)</dt>
+    <dd class="col-sm-8">@Html.DisplayFor(m => m.StartTime)</dd>
+
+    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(m => m.EndTime)</dt>
+    <dd class="col-sm-8">@Html.DisplayFor(m => m.EndTime)</dd>
+
+    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(m => m.TicketPrice)</dt>
+    <dd class="col-sm-8">@Html.DisplayFor(m => m.TicketPrice)</dd>
+
+
+</dl>

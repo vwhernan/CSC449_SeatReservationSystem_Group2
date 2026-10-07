@@ -6,6 +6,7 @@ using static CSC449_SeatReservationSystem.Entity.Movie;
 using static CSC449_SeatReservationSystem.Entity.Auditorium;
 using static CSC449_SeatReservationSystem.Entity.MovieTheater;
 using static CSC449_SeatReservationSystem.Entity.Seat;
+using static CSC449_SeatReservationSystem.Entity.Showtime;
 
 namespace CSC449_SeatReservationSystem
 {
@@ -25,6 +26,7 @@ namespace CSC449_SeatReservationSystem
             builder.Services.AddScoped<IRepository<Auditorium, AuditoriumModel>,AuditoriumRepository>();
             builder.Services.AddScoped<IRepository<Movie, MovieModel>, MovieRepository>();
             builder.Services.AddScoped<IRepository<Seat, SeatModel>,SeatRepository>();
+            builder.Services.AddScoped<IRepository<Showtime, ShowtimeModel>,ShowtimeRepository>();
 
 
             // Add services to the container.

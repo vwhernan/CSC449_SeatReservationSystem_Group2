@@ -1,0 +1,60 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+@using static CSC449_SeatReservationSystem.Entity.Showtime
+@model ShowtimeModel
+
+@{
+    ViewData["Title"] = "Add Showtime";
+    var auditoriumId = ViewBag.AuditoriumId;
+}
+
+<div class="container my-4" style="max-width: 600px;">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white py-3">
+            <h4 class="card-title mb-0">Add New Showtime</h4>
+        </div>
+        <div class="card-body p-4">
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(m => m.AuditoriumId, new { value = auditoriumId })
+
+                
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Movie</label>
+                    @Html.DropDownList(
+                        "selectedMovieId",
+                        ViewBag.Movies as SelectList,
+                        "-- Select Movie --",
+                        new { @class = "form-select" }
+                    )
+                    @Html.ValidationMessageFor(m => m.Movie, "", new { @class = "text-danger small mt-1 d-block" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.StartTime, "Start Time", new { @class = "form-label fw-semibold" })
+                    @Html.TextBoxFor(
+                        m => m.StartTime,
+                        "{0:yyyy-MM-ddTHH:mm}",
+                        new { @class = "form-control", type = "datetime-local" }
+                    )
+                    @Html.ValidationMessageFor(m => m.StartTime, "", new { @class = "text-danger small mt-1 d-block" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.TicketPrice, "Ticket Price ($)", new { @class = "form-label fw-semibold" })
+                    @Html.TextBoxFor(
+                        m => m.TicketPrice,
+                        new { @class = "form-control", type = "number", step = "0.01", min = "0", max = "1000", placeholder = "e.g., 12.50" }
+                    )
+                    @Html.ValidationMessageFor(m => m.TicketPrice, "", new { @class = "text-danger small mt-1 d-block" })
+                </div>
+
+                <div class="mt-4 pt-2 border-top">
+                    <button-row>
+                        <submit-button></submit-button>
+                        <cancel-button asp-action="Details" asp-controller="Auditorium" asp-route-id="@auditoriumId"></cancel-button>
+                    </button-row>
+                </div>
+            }
+        </div>
+    </div>
+</div>

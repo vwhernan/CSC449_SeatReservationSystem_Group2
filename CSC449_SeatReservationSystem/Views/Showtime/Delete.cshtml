@@ -1,0 +1,21 @@
+﻿@using CSC449_SeatReservationSystem.Entity
+@model Showtime
+@{
+    ViewData["Title"] = "Delete Showtime";
+}
+
+<h3>Delete Showtime</h3>
+
+<partial name="_View" model="Model" />
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.AuditoriumId)
+    <alert alert-heading="Are you sure?" ui-style="warning">
+        Are you sure you want to delete this showtime? This action cannot be undone.
+    </alert>
+    <button-row>
+        <yes-button></yes-button>
+        <no-button asp-action="Details" asp-route-id="@Model.Id"></no-button>
+    </button-row>
+}
